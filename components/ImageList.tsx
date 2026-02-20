@@ -2,6 +2,8 @@ import React from "react";
 import { View, Image, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { ImageItem } from "../types";
 
+ 
+ // Создаем функциональный компонент ImageList
 export default function ImageList({
   images,
   onDelete,

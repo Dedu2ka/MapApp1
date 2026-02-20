@@ -7,16 +7,32 @@ export default function Map({
   markers,
   setMarkers,
   onMarkerPress,
+  region, // Controlled region из родителя
+  onRegionChangeComplete, // Callback для обновления региона в родителе
 }: {
   markers: MarkerItem[];
   setMarkers: React.Dispatch<React.SetStateAction<MarkerItem[]>>;
   onMarkerPress: (id: string) => void;
+  region: {
+    latitude: number;
+    longitude: number;
+    latitudeDelta: number;
+    longitudeDelta: number;
+  };
+  onRegionChangeComplete: (region: {
+    latitude: number;
+    longitude: number;
+    latitudeDelta: number;
+    longitudeDelta: number;
+  }) => void;
 }) {
   const [mapReady, setMapReady] = useState(false);
 
+  // Генератор id для маркеров
   const generateId = () =>
     Date.now().toString() + Math.random().toString(36).substring(2);
 
+  // Обработка долгого нажатия для добавления маркера
   const handleLongPress = (event: any) => {
     try {
       const { latitude, longitude } = event.nativeEvent.coordinate;
@@ -36,12 +52,8 @@ export default function Map({
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        initialRegion={{
-          latitude: 55.7558,
-          longitude: 37.6173,
-          latitudeDelta: 0.05,
-          longitudeDelta: 0.05,
-        }}
+        region={region} // controlled region, чтобы карта не сбрасывалась
+        onRegionChangeComplete={onRegionChangeComplete} // обновляем регион в родителе
         onLongPress={handleLongPress}
         onMapReady={() => setMapReady(true)}
       >
