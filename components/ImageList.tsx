@@ -3,7 +3,7 @@ import { View, Image, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { ImageItem } from "../types";
 
  
- // Создаем функциональный компонент ImageList
+ // Создаем функциональный компонент ImageList передаются пропсы массив изображений и функция удаления по id 
 export default function ImageList({
   images,
   onDelete,
@@ -11,13 +11,14 @@ export default function ImageList({
   images: ImageItem[];
   onDelete: (id: string) => void;
 }) {
+  // Если список пуст
   if (images.length === 0) return <Text style={styles.noImages}>Нет изображений</Text>;
-
+  // Если изображения есть — отображаем их
   return (
     <>
-      {images.map((img) => (
-        <View key={img.id} style={styles.imageContainer}>
-          <Image source={{ uri: img.uri }} style={styles.image} />
+      {images.map((img) => (// Перебираем массив изображений методом map
+        <View key={img.id} style={styles.imageContainer}>{/* Контейнер для каждого изображения */}
+          <Image source={{ uri: img.uri }} style={styles.image} />{/* Передаём путь и применяем стиль */}
           <TouchableOpacity style={styles.deleteBtn} onPress={() => onDelete(img.id)}>
             <Text style={{ color: "white" }}>Удалить</Text>
           </TouchableOpacity>
