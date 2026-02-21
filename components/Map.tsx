@@ -11,7 +11,7 @@ export default function Map({// Основной компонент карты
   onRegionChangeComplete, // Функция при завершении перемещения карты
 }: {
   markers: MarkerItem[];
-  setMarkers: React.Dispatch<React.SetStateAction<MarkerItem[]>>;
+  setMarkers: React.Dispatch<React.SetStateAction<MarkerItem[]>>;//Dispatch - обновление состояния, SetStateAction - передаём либо новое значение либо функцию котрая вернет новое значение 
   onMarkerPress: (id: string) => void;
   region: {
     latitude: number;
@@ -29,7 +29,7 @@ export default function Map({// Основной компонент карты
   const [mapReady, setMapReady] = useState(false);// Состояние готовности карты (true после полной загрузки)
 
   const generateId = () =>
-    Date.now().toString() + Math.random().toString(36).substring(2);
+    Date.now().toString() + Math.random().toString(36).substring(2);//получаем число от 0 до 1 переводим в систему счисления 36 отрезаем первые 2 символа (0.)
 
   
   const handleLongPress = (event: any) => {// Функция добавления маркера при долгом нажатии
@@ -78,9 +78,9 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   map: { flex: 1 },
   loader: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: "center",
-    alignItems: "center",
+    ...StyleSheet.absoluteFillObject,//Занимает всю область родителя
+    justifyContent: "center",//Верт вырав
+    alignItems: "center",//Гориз вырав
     backgroundColor: "rgba(255,255,255,0.5)",
   },
 });
